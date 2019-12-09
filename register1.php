@@ -21,12 +21,21 @@
 	$sql="INSERT INTO user(id,Full_Name,Designation_ID,EmployeeCode,TeamLead_ID,Username,password,Email)
 	VALUES('$id','$name','$desid','$empid','$teamid','$user','$pass','$email')";
 	//$conn->query($sql);
+	$sql1="INSERT INTO leaves(id,Email)VALUES('$id','$email')";
 	if(!mysqli_query($conn,$sql))
+	
 	{
 		echo 'Not inserted';
 	}
+	
 	else
-	{		echo 'Thank you for registering . A registration mail has been sent to you email id.';
+	{		echo 'Thank you for registering . A registration mail has been sent to you email id.
+					go back to login page
+					<br><button><a href="login.html">login page</button>';
+	}
+	if(!mysqli_query($conn,$sql1))
+	{
+		echo '';
 	}
 	if(isset($_POST['submit'])){
 	$subject = 'Registration';
