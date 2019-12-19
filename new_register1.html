@@ -1,30 +1,62 @@
 <html>
+<style>
+
+</style>
 <head>
+<link rel="stylesheet" type="text/css" href="form.css">
 </head>
 <body>
+<?php
+	
+	$conn= mysqli_connect('localhost','root','','leave-portal');
+	if(!$conn)
+	{
+		echo 'not connected to server';
+	}
+	if(!mysqli_select_db($conn,'leave-portal'))
+	{
+		echo 'Database not selected';
+	}
+	$sql="SELECT Full_Name from user ";
+	$result = mysqli_query($conn,$sql);
+	?>
+	
 <center><H1>Registration form</H1></center>
+<div>
 <form action="register1.php" method="POST">
-	<center><p><label>ID:</label><br><input type="text" name="id" placeholder="ID">
+	<center><p><label>ID: </label><input type="text" name="id" placeholder="ID">
 	<br>
-	<label>Full Name:</label><br><input type="text" name="name" placeholder="Full name">
+	<label>Full Name:</label><input type="text" name="name" placeholder="Full name">
 	<br>
-	<label>Designation ID:</label><br><input type="text" name="desid" placeholder="Designation ID">
-	<br>
-	<label>Employee Code:</label><br><input type="text" name="empid" placeholder="Employee Code">
-	<br>
-	<label>Team Leader ID:</label><br><select id="input" name="teamid">
-	<option>1</option>
-	<option>2</option>
-	<option>3</option>
+	<label>Role ID:</label><select type="text" name="desid" placeholder="Role ID">
+	<option>1-Employee</option>
+	<option>2-Team Leader</option>
+	<option>3-HR</option>
 	</select>
 	<br>
-	<label>Username:</label><br><input type="text" name="user" placeholder="Username">
+	<label>Employee Code:</label><input type="text" name="empid" placeholder="Employee Code">
 	<br>
-	<label>Password:</label><br><input type="password" name="pass" placeholder="Password">
+	<label>Team Leader name:</label>
+	<?php
+	//echo '$result';
+	//echo "Hello";
+	echo "<select>";
+	// $row = mysqli_fetch_array($result);
+	while ($row = mysqli_fetch_array($result))
+	{
+		echo "<option value='" . $row['Full_Name'] ."'>" . $row['Full_Name'] ."</option>";
+	}
+	echo "</select>";
+	?>
 	<br>
-	<label>Email:</label><br><input type="text" name="email" placeholder="Email">
+	<label>Username:</label><input type="text" name="user" placeholder="Username">
+	<br>
+	<label>Password:</label><input type="password" name="pass" placeholder="Password">
+	<br>
+	<label>Email:</label><input type="text" name="email" placeholder="Email">
 	<br></p>
 	<button type="submit" name="submit">Sign Up</button></center>
 </form>
+</div>
 </body>
 </html>

@@ -26,8 +26,8 @@ if(isset($_POST['pass_word'])){
 $result = mysqli_query($conn,"select * from user where Username = '$username' and password = '$password'")
   or die('Failed to query database');
  $row = mysqli_fetch_array($result);
- if ( $row['Username'] == $username && $row['password'] == $password ) {
- echo '<center><p>Login success! Welcome '.$row['Username'],
+ if ( $row['Username'] == $username && $row['password'] == $password  ) {
+echo '<center><p>Login success! Welcome '.$row['Username'],
  '<p><center>Go to your web portal<br>
  <form action="portal.php" method="POST">
  <label>Confirm your email id<br>

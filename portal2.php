@@ -14,11 +14,12 @@
 	$end_date = $_POST['end_date'];
 	$type_leave = $_POST['type_leave'];
 	$reason = $_POST['reason'];
-	$app = $_POST['app_p'];
-	$email=$_POST['email'];
+	//$app = $_POST['app_p'];
+	session_start();
+	$email=$_SESSION["ema"];
 	
 	$sql="UPDATE leaves SET User_id='$User_id',StartDateOfleave='$st_date',EndDateOfLeave='$end_date',typeOfLeave='$type_leave'
-	,Reason='$reason',isApproved='$app'WHERE Email='$email'";
+	,Reason='$reason',isApproved='no' WHERE Email='$email'";
 	//$conn->query($sql);
 	//$sql1="INSERT INTO leaves(id,Email)VALUES('$id','$email')";
 	if(!mysqli_query($conn,$sql))
@@ -28,7 +29,8 @@
 	}
 	
 	else
-	{		echo 'Thank you . A mail has been sent to you the respective member.';
+	{		echo '<link rel="stylesheet" type="text/css" href="form.css">
+			<div><center><p>Thank you . A mail has been sent to you the respective member.</p></center></div>';
 	}
 	
 	if(isset($_POST['submit'])){
